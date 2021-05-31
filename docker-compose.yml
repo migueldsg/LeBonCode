@@ -6,9 +6,22 @@ services:
     ports:
       - 3310:3306
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: admin
+      MYSQL_USER: miguel
+      MYSQL_PASSWORD: password
     volumes:
       - admin-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    links: 
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: miguel
+      PMA_PASSWORD: pwd
 volumes:
   admin-data:
